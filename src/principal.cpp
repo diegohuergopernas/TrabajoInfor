@@ -1,10 +1,13 @@
 #include "freeglut.h"
 #include "ETSIDI.h"
+#include "mundo.h"
 
 //NO HACE FALTA LLAMARLAS EXPLICITAMENTE
 void OnDraw(void); //esta funcion sera llamada para dibujar
 void OnTimer(int value); //esta funcion sera llamada cuando transcurra una temporizacion
 void OnKeyboardDown(unsigned char key, int x, int y); //cuando se pulse una tecla	
+
+Mundo mundo;
 
 int main(int argc,char* argv[])
 {
@@ -45,7 +48,7 @@ void OnDraw(void)
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
 	
-	//funciones de dibujo
+	/*funciones de dibujo
 
 	gluLookAt(0, 7.5, 20,  // posicion del ojo
 		0.0, 7.5, 0.0,      // hacia que punto mira  (0,0,0) 
@@ -61,7 +64,7 @@ void OnDraw(void)
 	glTexCoord2d(0, 0); glVertex2f(-10, 15);
 	glEnd();
 	glEnable(GL_LIGHTING);
-	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_TEXTURE_2D);*/
 
 	//no borrar esta linea ni poner nada despues
 	glutSwapBuffers();

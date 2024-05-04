@@ -1,5 +1,10 @@
 #pragma once
-class tablero
-{
-};
+#include "freeglut.h"
 
+class Tablero {
+
+public:
+
+	Tablero() {};
+	void dibujarTablero();
+};
