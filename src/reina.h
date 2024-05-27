@@ -3,5 +3,7 @@
 
 class Reina: public Pieza
 {
-
+public:
+	Reina() {};
+	void dibujarPieza() override;
 };
