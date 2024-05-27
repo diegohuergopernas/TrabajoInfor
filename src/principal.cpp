@@ -47,6 +47,7 @@ void OnDraw(void)
 	//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
+	mundo.dibujaMundo();
 	
 	/*funciones de dibujo
 

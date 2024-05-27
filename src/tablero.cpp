@@ -3,7 +3,7 @@
 
 void Tablero::dibujarTablero() {
     // Tamaño de cada casilla del tablero
-    float casillaSize = 1.0f;
+    float casillaSize = 1.5f;
 
     // Dibuja el tablero
     for (int i = 0; i < 8; ++i) {

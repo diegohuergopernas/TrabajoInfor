@@ -1,8 +1,8 @@
 #include "pieza.h"
 
-Pieza::Pieza(Tipo tipo, Color color, Coordenadas coordenadas)
+/*Pieza::Pieza(Tipo tipo, Color color, Coordenadas coordenadas)
 {
-}
+}*/
 
 void Pieza::SetColor()
 {
