@@ -1,5 +1,6 @@
 #include "tablero.h"
 
+
 void Tablero::dibujarTablero() {
     // Tamaño de cada casilla del tablero
     float casillaSize = 1.0f;
