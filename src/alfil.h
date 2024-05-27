@@ -1,4 +1,6 @@
 #pragma once
-class Alfin {
+#include "pieza.h"
+
+class Alfin : public Pieza {
 
 };
