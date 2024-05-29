@@ -5,7 +5,7 @@
 class Mundo
 {
 public:
-	Mundo() {};
+	Mundo(int filas = 8, int columnas = 8) : tablero(filas, columnas) {}
 
 	Tablero tablero;
 	Pieza* pieza;

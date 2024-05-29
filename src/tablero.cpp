@@ -2,12 +2,9 @@
 
 
 void Tablero::dibujarTablero() {
-    // Tamaño de cada casilla del tablero
-    float casillaSize = 1.5f;
-
-    // Dibuja el tablero
-    for (int i = 0; i < 8; ++i) {
-        for (int j = 0; j < 8; ++j) {
+    // Dibuja el tablero con las dimensiones especificadas
+    for (int i = 0; i < filas; ++i) {
+        for (int j = 0; j < columnas; ++j) {
             // Calcula las coordenadas de la esquina superior izquierda de la casilla
             float x = i * casillaSize;
             float y = j * casillaSize;

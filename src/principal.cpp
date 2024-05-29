@@ -1,6 +1,7 @@
 #include "freeglut.h"
 #include "ETSIDI.h"
 #include "mundo.h"
+#include "interfaz.h"
 
 //NO HACE FALTA LLAMARLAS EXPLICITAMENTE
 void OnDraw(void); //esta funcion sera llamada para dibujar
@@ -47,7 +48,9 @@ void OnDraw(void)
 	//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
-	mundo.dibujaMundo();
+	
+	Interfaz interfaz;
+	interfaz.mostrarMenu();
 	
 	/*funciones de dibujo
 
