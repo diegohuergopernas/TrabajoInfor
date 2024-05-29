@@ -1,7 +1,7 @@
 #pragma once
 #include "tablero.h"
 #include "freeglut.h"
-#include "reina.h"
+#include "listapiezas.h"
 class Mundo
 {
 public:
@@ -9,6 +9,6 @@ public:
 
 	Tablero tablero;
 	Pieza* pieza;
-
+	ListaPiezas piezas;
 	void dibujaMundo();
 };

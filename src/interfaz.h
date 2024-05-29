@@ -2,7 +2,7 @@
 #include "mundo.h"
 #include <iostream>
 
-class Interfaz {
+/*class Interfaz {
 public:
     void mostrarMenu();
-};
+};*/

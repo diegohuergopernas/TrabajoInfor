@@ -4,6 +4,6 @@
 class Reina: public Pieza
 {
 public:
-	Reina() {};
+	//Reina() {};
 	void dibujarPieza() override;
 };

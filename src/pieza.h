@@ -1,15 +1,15 @@
 #pragma once
-
+#include "coordenadas.h"
 enum Tipo { REY, REINA, ALFIL, TORRE, CABALLO, PEON };
 enum Color { NEGRO, BLANCO };
 class Pieza {
 
 	Color color;
 	Tipo tipo;
-	//Coordenadas coordenadas;
+	Coordenadas coordenadas;
 
 public:
-	//Pieza(Tipo tipo, Color color, Coordenadas coordenadas);
+	Pieza(Tipo tipo, Color color, Coordenadas coordenadas);
 	virtual ~Pieza();
 
 	//Funciones comunes a todas las piezas

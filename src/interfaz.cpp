@@ -1,6 +1,6 @@
 #include "interfaz.h"
 
-void Interfaz::mostrarMenu() {
+/*void Interfaz::mostrarMenu() {
     int opcion;
     std::cout << "Seleccione el tipo de tablero:\n";
     std::cout << "1. 4×5 con un único peóns\n";
@@ -26,4 +26,4 @@ void Interfaz::mostrarMenu() {
     mundo->dibujaMundo();
 
     delete mundo;
-}
+}*/

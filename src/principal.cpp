@@ -48,9 +48,9 @@ void OnDraw(void)
 	//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
-	
-	Interfaz interfaz;
-	interfaz.mostrarMenu();
+	mundo.dibujaMundo();
+	//Interfaz interfaz;
+	//interfaz.mostrarMenu();
 	
 	/*funciones de dibujo
 
