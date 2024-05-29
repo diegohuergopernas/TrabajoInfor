@@ -23,6 +23,7 @@
 	<ClCompile Include="src\caballo.cpp" />
 	<ClCompile Include="src\coordenadas.cpp" />
 	<ClCompile Include="src\interfaz.cpp" />
+	<ClCompile Include="src\listapiezas.cpp" />
     <ClCompile Include="src\mundo.cpp" />
 	<ClCompile Include="src\peon.cpp" />
 	<ClCompile Include="src\pieza.cpp" />
@@ -38,6 +39,7 @@
 	<ClInclude Include="src\caballo.h" />
 	<ClInclude Include="src\coordenadas.h" />
 	<ClInclude Include="src\interfaz.h" />
+	<ClInclude Include="src\listapiezas.h" />
 	<ClInclude Include="src\mundo.h" />
 	<ClInclude Include="src\peon.h" />
 	<ClInclude Include="src\pieza.h" />
