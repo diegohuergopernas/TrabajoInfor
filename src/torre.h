@@ -1,9 +1,9 @@
 #pragma once
 #include "pieza.h"
 #include "coordenadas.h"
-class Torre : public Pieza {
+class Torre  {
 public:
-	Torre(Color color, Coordenadas cord);
-	void dibujarPieza() override;
+	Torre(Tipo tipo, Color color, Coordenadas coordenadas);
+	void dibujaPieza();
 
 };

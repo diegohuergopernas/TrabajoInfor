@@ -4,12 +4,12 @@
 enum Tipo { REY, REINA, ALFIL, TORRE, CABALLO, PEON };
 enum Color { NEGRO, BLANCO };
 class Pieza {
-
+public:
 	Color color;
 	Tipo tipo;
 	Coordenadas coordenadas;
 
-public:
+
 	Pieza(Tipo tipo, Color color, Coordenadas coordenadas);
 	virtual ~Pieza();
 

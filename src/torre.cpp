@@ -1,8 +1,9 @@
 #include "torre.h"
+#include "ETSIDI.h"
 
-Torre::Torre(Color color, Coordenadas coord) :Pieza(color, coord, TORRE) {}
+Torre::Torre(Tipo tipo, Color color, Coordenadas coordenadas) {}
 
-void Torre::dibuja() {
-	Sprite spriteNeg{ "bin/imagenes/torreneg.png" };
-	Sprite spriteBlc{ "bin/imagenes/torreblc.png" };
+void Torre::dibujaPieza() {
+	ETSIDI::Sprite spriteNeg{ "bin/imagenes/torreneg.png" };
+	ETSIDI::Sprite spriteBlc{ "bin/imagenes/torreblc.png" };
 }
