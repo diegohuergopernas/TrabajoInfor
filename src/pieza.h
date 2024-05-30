@@ -1,5 +1,6 @@
 #pragma once
 #include "coordenadas.h"
+#include "ETSIDI.h"
 enum Tipo { REY, REINA, ALFIL, TORRE, CABALLO, PEON };
 enum Color { NEGRO, BLANCO };
 class Pieza {
