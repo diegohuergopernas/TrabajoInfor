@@ -21,6 +21,7 @@ void Mundo::dibujaMundo()
         centerX, centerY, 0.0,      // Hacia qué punto mira
         0.0, 1.0, 0);      // Definimos hacia arriba (eje Y)
     tablero.dibujarTablero();
+    caballo.dibuja();
     //pieza.dibujarPieza();
 
 }
