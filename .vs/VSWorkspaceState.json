@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src"
   ],
-  "SelectedNode": "\\solucion.sln",
+  "SelectedNode": "\\src\\reina.cpp",
   "PreviewInSolutionExplorer": false
 }
