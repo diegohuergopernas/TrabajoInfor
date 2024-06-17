@@ -5,6 +5,8 @@ void Caballo::dibuja()
 	glPushMatrix();
 	glTranslated(1.1, -0.2, 1);//posicion
 	sprite.draw();
+	glTranslated(8.2, -0.2, 1);//posicion
+	sprite.draw();
 }
 
 //plateamiento inicial del algoritmo del movimiento

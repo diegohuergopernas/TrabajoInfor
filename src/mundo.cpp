@@ -17,11 +17,12 @@ void Mundo::dibujaMundo()
     float eyeY = centerY;
     float eyeZ = (filas > columnas ? filas : columnas) * casillaSize;  // La distancia de la cámara depende del tamaño del tablero
 
-    gluLookAt(eyeX, eyeY, eyeZ + 7,  // Posición del ojo
+    gluLookAt(eyeX, eyeY, eyeZ +7.5,  // Posición del ojo
         centerX, centerY, 0.0,      // Hacia qué punto mira
         0.0, 1.0, 0);      // Definimos hacia arriba (eje Y)
     tablero.dibujarTablero();
     caballo.dibuja();
+    reina.dibuja();
     //pieza.dibujarPieza();
 
 }

@@ -3,17 +3,15 @@
 #include "ETSIDI.h"
 
 
-void Reina::dibujarPieza()
+void Reina::dibuja()
 {
-    glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/reina_blanca.png").id);
+	glPushMatrix();
+	glTranslated(-4.1, 0, 0);//posicion
+	sprite.draw();
+	
+}
 
-    glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 0.0f); glVertex2f(-0.5f, -0.5f);
-    glTexCoord2f(1.0f, 0.0f); glVertex2f(0.5f, -0.5f);
-    glTexCoord2f(1.0f, 1.0f); glVertex2f(0.5f, 0.5f);
-    glTexCoord2f(0.0f, 1.0f); glVertex2f(-0.5f, 0.5f);
-    glEnd();
-
-    glDisable(GL_TEXTURE_2D);
+bool Reina::comprobarMovimiento()
+{
+    return false;
 }
