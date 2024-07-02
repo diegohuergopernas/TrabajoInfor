@@ -11,7 +11,7 @@ protected:
 	ETSIDI::Sprite sprite;
 public:
 	Pieza(Tipo tipo, Color color, Coordenadas coord);
-	virtual ~Pieza();
+	virtual ~Pieza() {};
 
 	//Funciones comunes a todas las piezas
 	virtual void dibujarPieza() = 0; //virtual puro para especializar dibuja en cada pieza

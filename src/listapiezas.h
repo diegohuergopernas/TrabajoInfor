@@ -16,7 +16,7 @@ public:
     }
     void eliminar(Pieza* p);
     void dibuja() { for (auto p : piezas) p->dibujarPieza(); }
-    void agregarPieza(Pieza* pieza) {
+    void agregar(Pieza* pieza) {
         piezas.push_back(pieza);
     }
 

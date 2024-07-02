@@ -2,7 +2,7 @@
 #include "mundo.h"
 #include <iostream>
 
-extern Mundo* mundo;
+//extern Mundo* mundo;// Declaración de la variable global mundo
 
 class Interfaz {
     Mundo* mundo;

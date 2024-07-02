@@ -2,17 +2,16 @@
 #include "ETSIDI.h"
 #include "mundo.h"
 #include "interfaz.h"
-#include "listapiezas.h"
-#include "tablero.h"
+
 
 //NO HACE FALTA LLAMARLAS EXPLICITAMENTE
 void OnDraw(void); //esta funcion sera llamada para dibujar
 void OnTimer(int value); //esta funcion sera llamada cuando transcurra una temporizacion
 void OnKeyboardDown(unsigned char key, int x, int y); //cuando se pulse una tecla	
 
-Mundo mundo;
+Mundo* mundo;
 Tablero tablero;
-ListaPiezas listapiezas;
+Interfaz interfaz;
 
 int main(int argc,char* argv[])
 {
@@ -47,6 +46,9 @@ int main(int argc,char* argv[])
 	/*for (auto pieza : listapiezas.obtenerPiezas()) {
 		tablero.agregarPieza(pieza);
 	}*/
+	if (mundo) {
+		mundo->dibujaMundo();
+	}
 		
 	
 	//pasarle el control a GLUT,que llamara a los callbacks
@@ -63,28 +65,10 @@ void OnDraw(void)
 	//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
-	tablerodibujarTablero();
+	tablero.dibujarTablero();
 	glFlush();	//Interfaz interfaz;
 	//interfaz.mostrarMenu();
 	
-	/*funciones de dibujo
-
-	gluLookAt(0, 7.5, 20,  // posicion del ojo
-		0.0, 7.5, 0.0,      // hacia que punto mira  (0,0,0) 
-		0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)  
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/fondo.png").id);
-	glDisable(GL_LIGHTING);
-	glBegin(GL_POLYGON);
-	glColor3f(1, 1, 1);
-	glTexCoord2d(0, 1); glVertex2f(-10, 0);
-	glTexCoord2d(1, 1); glVertex2f(10, 0);
-	glTexCoord2d(1, 0); glVertex2f(10, 15);
-	glTexCoord2d(0, 0); glVertex2f(-10, 15);
-	glEnd();
-	glEnable(GL_LIGHTING);
-	glDisable(GL_TEXTURE_2D);*/
-
 	//no borrar esta linea ni poner nada despues
 	glutSwapBuffers();
 }

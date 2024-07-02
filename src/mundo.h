@@ -21,6 +21,8 @@ public:
 	void dibujaMundo();
 };
 
+
+
 inline void Mundo::cambiarTurno() {
 	turnoActual = (turnoActual == BLANCO) ? NEGRO : BLANCO;
 }

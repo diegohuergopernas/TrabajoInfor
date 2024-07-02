@@ -1,6 +1,6 @@
 #pragma once
 #include "pieza.h"
-#include "coordenadas.h"
+#include <string>
 class Torre :public Pieza  {
 	ETSIDI::Sprite sprite;
 public:
@@ -20,4 +20,5 @@ public:
         int dy = abs(destino.get_y() - coordenadas.get_y());
         return (dx == 0 || dy == 0);
     }
+   
 };
