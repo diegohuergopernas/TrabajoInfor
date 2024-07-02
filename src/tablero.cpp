@@ -1,4 +1,5 @@
 #include "tablero.h"
+#include "pieza.h"
 
 
 void Tablero::dibujarTablero() {
@@ -27,3 +28,6 @@ void Tablero::dibujarTablero() {
         }
     }
 }
+
+
+

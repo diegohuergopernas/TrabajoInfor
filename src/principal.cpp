@@ -2,6 +2,8 @@
 #include "ETSIDI.h"
 #include "mundo.h"
 #include "interfaz.h"
+#include "listapiezas.h"
+#include "tablero.h"
 
 //NO HACE FALTA LLAMARLAS EXPLICITAMENTE
 void OnDraw(void); //esta funcion sera llamada para dibujar
@@ -9,6 +11,8 @@ void OnTimer(int value); //esta funcion sera llamada cuando transcurra una tempo
 void OnKeyboardDown(unsigned char key, int x, int y); //cuando se pulse una tecla	
 
 Mundo mundo;
+Tablero tablero;
+ListaPiezas listapiezas;
 
 int main(int argc,char* argv[])
 {
@@ -33,7 +37,18 @@ int main(int argc,char* argv[])
 	glutKeyboardFunc(OnKeyboardDown);
 
 	//POSIBLE INICIALIZACION
+	
+
+	// Inicializa interfaz
+	interfaz.iniciarJuego();
+	mundo = &interfaz.obtenerMundo();
+
+	// Agregar las piezas del tablero
+	/*for (auto pieza : listapiezas.obtenerPiezas()) {
+		tablero.agregarPieza(pieza);
+	}*/
 		
+	
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();	
 
@@ -48,8 +63,8 @@ void OnDraw(void)
 	//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
-	mundo.dibujaMundo();
-	//Interfaz interfaz;
+	tablerodibujarTablero();
+	glFlush();	//Interfaz interfaz;
 	//interfaz.mostrarMenu();
 	
 	/*funciones de dibujo

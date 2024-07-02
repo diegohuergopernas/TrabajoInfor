@@ -4,23 +4,28 @@
 enum Tipo { REY, REINA, ALFIL, TORRE, CABALLO, PEON };
 enum Color { NEGRO, BLANCO };
 class Pieza {
-public:
+protected:
 	Color color;
 	Tipo tipo;
 	Coordenadas coordenadas;
-
-
-	Pieza(Tipo tipo, Color color, Coordenadas coordenadas);
+	ETSIDI::Sprite sprite;
+public:
+	Pieza(Tipo tipo, Color color, Coordenadas coord);
 	virtual ~Pieza();
 
 	//Funciones comunes a todas las piezas
 	virtual void dibujarPieza() = 0; //virtual puro para especializar dibuja en cada pieza
-	virtual void moverPieza(int fila, int columna, Pieza*) = 0; //virtual puro para especializar movimiento de cada pieza
-	virtual void killPieza() = 0;//funcion matar
+	virtual void moverPieza(Coordenadas destino); //virtual puro para especializar movimiento de cada pieza
+	virtual bool comprobarMovimiento(Coordenadas destino) = 0;//comprobar movimiento valido
 
-	void SetColor();
-	void SetCoordenadas();
-	void SetTipo();
-
+	Tipo getTipo() const { return tipo; }
+	Color getColor() const { return color; }
+	Coordenadas getCoordenadas() const { return coordenadas; }
 
 };
+inline Pieza::Pieza(Tipo tipo, Color color, Coordenadas coord)
+	: tipo(tipo), color(color), coordenadas(coord), sprite("bin/imagenes/fondo.png") {}
+
+inline void Pieza::moverPieza(Coordenadas destino) {
+	coordenadas = destino;
+}
