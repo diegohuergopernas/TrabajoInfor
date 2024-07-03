@@ -12,7 +12,7 @@ class Tablero {
 
 public:
 
-	Tablero(int f = 8, int c = 8, float size = 1.5) : filas(f), columnas(c), casillaSize(size) {}
+	Tablero(int f = 8, int c = 8, float size = 1.0) : filas(f), columnas(c), casillaSize(size) {}
 
 	void dibujarTablero();
 	int getFilas() const { return filas; }
