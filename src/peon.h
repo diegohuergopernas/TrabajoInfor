@@ -12,7 +12,7 @@ public:
 
     void dibujarPieza() override {
         glPushMatrix();
-        glTranslatef(coordenadas.get_x(), coordenadas.get_y(), 0);
+        glTranslatef(coordenadas.get_x() - 0.5f, coordenadas.get_y()- 0.5f, 0);
         sprite.draw();
         glPopMatrix();
     }

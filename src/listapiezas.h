@@ -6,14 +6,10 @@
 using std::vector;
 class ListaPiezas
 {
-    vector<Pieza*> piezas;
+    std::vector<Pieza*> piezas;
 
 public:
-    ~ListaPiezas() {
-        for (auto pieza : piezas) {
-            delete pieza;
-        }
-    }
+    
     void eliminar(Pieza* p);
     void dibuja() { for (auto p : piezas) p->dibujarPieza(); }
     void agregar(Pieza* pieza) {

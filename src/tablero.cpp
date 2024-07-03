@@ -12,10 +12,10 @@ void Tablero::dibujarTablero() {
 
             // Alterna las casillas de colores
             if ((i + j) % 2 == 0) {
-                glColor3f(0.937, 0.847, 0.749); // crema
+                glColor3f(0.364, 0.533, 0.364); // verde
             }
             else {
-                glColor3f(0.364, 0.533, 0.364); // verde
+                glColor3f(0.937, 0.847, 0.749); // crema
             }
 
             // Dibuja un cuadrado con las coordenadas calculadas

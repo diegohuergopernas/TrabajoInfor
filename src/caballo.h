@@ -14,7 +14,7 @@ public:
 	Coordenadas get_siguiente() { return siguiente; }
 	void dibujarPieza() override {
 		glPushMatrix();
-		glTranslatef(coordenadas.get_x() - 3.5f, 0, coordenadas.get_y() - 3.5f);
+		glTranslatef(coordenadas.get_x() - 0.5f, 0, coordenadas.get_y() - 0.5f);
 		sprite.draw();
 		glPopMatrix();
 	}

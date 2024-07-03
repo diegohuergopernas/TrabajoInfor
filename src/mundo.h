@@ -1,6 +1,6 @@
 #pragma once
 #include "tablero.h"
-#include "freeglut.h"
+#include <vector>
 #include "listapiezas.h"
 #include "pieza.h"
 #include "ETSIDI.h"

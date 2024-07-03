@@ -13,7 +13,7 @@ public:
 	Pieza(Tipo tipo, Color color, Coordenadas coord);
 	virtual ~Pieza() {};
 
-	//Funciones comunes a todas las piezas
+	//Funciones comunes a todas	las piezas
 	virtual void dibujarPieza() = 0; //virtual puro para especializar dibuja en cada pieza
 	virtual void moverPieza(Coordenadas destino); //virtual puro para especializar movimiento de cada pieza
 	virtual bool comprobarMovimiento(Coordenadas destino) = 0;//comprobar movimiento valido

@@ -2,7 +2,8 @@
 #include "ETSIDI.h"
 #include "mundo.h"
 #include "interfaz.h"
-
+#include "listapiezas.h"
+#include "tablero.h"
 
 //NO HACE FALTA LLAMARLAS EXPLICITAMENTE
 void OnDraw(void); //esta funcion sera llamada para dibujar
@@ -28,6 +29,7 @@ int main(int argc,char* argv[])
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_COLOR_MATERIAL);	
 	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
 	gluPerspective( 40.0, 800/600.0f, 0.1, 150);
 
 	//Registrar los callbacks
@@ -40,16 +42,7 @@ int main(int argc,char* argv[])
 
 	// Inicializa interfaz
 	interfaz.iniciarJuego();
-	mundo = &interfaz.obtenerMundo();
-
-	// Agregar las piezas del tablero
-	/*for (auto pieza : listapiezas.obtenerPiezas()) {
-		tablero.agregarPieza(pieza);
-	}*/
-	if (mundo) {
-		mundo->dibujaMundo();
-	}
-		
+	mundo = &interfaz.obtenerMundo();		
 	
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();	
@@ -65,9 +58,29 @@ void OnDraw(void)
 	//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
-	tablero.dibujarTablero();
-	glFlush();	//Interfaz interfaz;
+	// Ajustar la cámara para ver el tablero desde arriba
+	int filas = tablero.getFilas();
+	int columnas = tablero.getColumnas();
+	float casillaSize = tablero.getCasillaSize();
+
+	// Calcula el centro del tablero
+	float centerX = columnas * casillaSize / 2.0f;
+	float centerY = filas * casillaSize / 2.0f;
+
+	// Ajusta la posición de la cámara según el tamaño del tablero
+	float eyeX = centerX;
+	float eyeY = centerY;
+	float eyeZ = (filas > columnas ? filas : columnas) * casillaSize;  // La distancia de la cámara depende del tamaño del tablero
+
+	gluLookAt(eyeX, eyeY, eyeZ + 7,  // Posición del ojo
+		centerX, centerY, 0.0,      // Hacia qué punto mira
+		0.0, 1.0, 0);      // Definimos hacia arriba (eje Y).0); // Vector de arriba (negativo en Z para que mire desde arriba)
+
+
 	//interfaz.mostrarMenu();
+	if (mundo) {
+		mundo->dibujaMundo();
+	}
 	
 	//no borrar esta linea ni poner nada despues
 	glutSwapBuffers();
