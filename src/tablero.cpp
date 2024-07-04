@@ -4,8 +4,8 @@
 
 void Tablero::dibujarTablero() {
     // Dibuja el tablero con las dimensiones especificadas
-    for (int i = 0; i < filas; ++i) {
-        for (int j = 0; j < columnas; ++j) {
+    for (int i = 0; i < columnas; ++i) {
+        for (int j = 0; j < filas; ++j) {
             // Calcula las coordenadas de la esquina superior izquierda de la casilla
             float x = i * casillaSize;
             float y = j * casillaSize;
