@@ -49,6 +49,18 @@ void Mundo::moverPieza(Coordenadas origen, Coordenadas destino) {
             std::cout << "Movimiento invalido: ruta bloqueada" << std::endl;
             return;
         }
+        //logica especial peon
+        if (pieza->getTipo() == PEON) {
+            int dx = abs(destino.get_x() - origen.get_x());
+            int dy = destino.get_y() - origen.get_y();
+            if ((dx == 1 && dy == ((pieza->getColor() == BLANCO) ? 1 : -1)) && obtenerPiezaEn(destino)) {
+                // Captura en diagonal
+            }
+            else if (dx != 0 || obtenerPiezaEn(destino)) {
+                std::cout << "Movimiento invalido: el peón no puede moverse a esa casilla" << std::endl;
+                return;
+            }
+        }
         Pieza* destinoPieza = obtenerPiezaEn(destino);
         if (destinoPieza && destinoPieza->getColor() != pieza->getColor()) {
             piezas.eliminar(destinoPieza);
@@ -59,6 +71,7 @@ void Mundo::moverPieza(Coordenadas origen, Coordenadas destino) {
         }
         pieza->moverPieza(destino);
         cambiarTurno();
+  
     }
 }
 
