@@ -25,6 +25,7 @@
     <ClCompile Include="src\tablero.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cursor.h" />
     <ClInclude Include="src\alfil.h" />
     <ClInclude Include="src\caballo.h" />
     <ClInclude Include="src\coordenadas.h" />

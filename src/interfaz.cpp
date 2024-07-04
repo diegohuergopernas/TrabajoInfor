@@ -15,6 +15,8 @@ extern Mundo* mundo;  // Declaración de la variable global
 
 Coordenadas origen, destino;
 bool seleccionOrigen = true;
+extern int cursorX;
+extern int cursorY;
 
 void Interfaz::mostrarMenu() {
     int opcion;
@@ -95,36 +97,34 @@ void procesarEntrada(unsigned char key, int x, int y) {
     // Por ejemplo, WASD para mover, Enter para confirmar
     switch (key) {
     case 'w':
-        if (seleccionOrigen) origen.set_y(origen.get_y() + 1);
-        else destino.set_y(destino.get_y() + 1);
+        cursorY = (cursorY + 1) % mundo->getTablero().getFilas();
         break;
     case 's':
-        if (seleccionOrigen) origen.set_y(origen.get_y() - 1);
-        else destino.set_y(destino.get_y() - 1);
+        cursorY = (cursorY - 1 + mundo->getTablero().getFilas()) % mundo->getTablero().getFilas();
         break;
     case 'a':
-        if (seleccionOrigen) origen.set_x(origen.get_x() - 1);
-        else destino.set_x(destino.get_x() - 1);
+        cursorX = (cursorX - 1 + mundo->getTablero().getColumnas()) % mundo->getTablero().getColumnas();
         break;
     case 'd':
-        if (seleccionOrigen) origen.set_x(origen.get_x() + 1);
-        else destino.set_x(destino.get_x() + 1);
+        cursorX = (cursorX + 1) % mundo->getTablero().getColumnas();
         break;
     case 13: // Enter
         if (seleccionOrigen) {
             // Verificar si hay una pieza en la posición origen
-            if (mundo->obtenerPiezaEn(origen)) {
+            if (mundo->obtenerPiezaEn(Coordenadas(cursorX,cursorY))) {
+                origen = Coordenadas(cursorX, cursorY);
                 seleccionOrigen = false;
             }
         }
         else {
             // Intentar mover la pieza
             try {
+                destino = Coordenadas(cursorX, cursorY);
                 mundo->moverPieza(origen, destino);
                 seleccionOrigen = true;
             }
             catch (const std::exception& e) {
-                std::cout << "Movimiento inválido: " << e.what() << std::endl;
+                std::cout << "Movimiento invalido: " << e.what() << std::endl;
                 seleccionOrigen = true;
             }
         }

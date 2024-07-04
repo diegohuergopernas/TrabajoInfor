@@ -9,6 +9,23 @@
 void OnDraw(void); //esta funcion sera llamada para dibujar
 void OnTimer(int value); //esta funcion sera llamada cuando transcurra una temporizacion
 void OnKeyboardDown(unsigned char key, int x, int y); //cuando se pulse una tecla	
+// Función para dibujar un rectángulo (cursor) en la posición del cursor
+int cursorX = 0; // Posición del cursor en el eje X
+int cursorY = 0; // Posición del cursor en el eje Y
+void drawCursor(float x, float y, float size) {
+	glDisable(GL_DEPTH_TEST);
+	glLineWidth(5.0); // Grosor de la línea
+	glColor3f(1.0, 0.0, 0.0); // Color rojo
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(x, y);
+	glVertex2f(x + size, y);
+	glVertex2f(x + size, y + size);
+	glVertex2f(x, y + size);
+	glTranslatef(0.0, 0.0, 0.1);
+	glEnd();
+	glLineWidth(1.0); // Restablecer grosor de línea al valor predeterminado
+	glEnable(GL_DEPTH_TEST);
+}
 
 Mundo* mundo;
 Tablero tablero;
@@ -59,9 +76,9 @@ void OnDraw(void)
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
 	// Ajustar la cámara para ver el tablero desde arriba
-	int filas = tablero.getFilas();
-	int columnas = tablero.getColumnas();
-	float casillaSize = tablero.getCasillaSize();
+	int filas = mundo->getTablero().getFilas();
+	int columnas = mundo->getTablero().getColumnas();
+	float casillaSize = mundo->getTablero().getCasillaSize();
 
 	// Calcula el centro del tablero
 	float centerX = columnas * casillaSize / 2.0f;
@@ -81,13 +98,52 @@ void OnDraw(void)
 	if (mundo) {
 		mundo->dibujaMundo();
 	}
+	// Dibujar el cursor de selección
+	drawCursor(cursorX * casillaSize, cursorY * casillaSize, casillaSize);
 	
 	//no borrar esta linea ni poner nada despues
 	glutSwapBuffers();
 }
 void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 {
-	//poner aqui el código de teclado
+	if (mundo) {
+		switch (key) {
+		case 'w':
+			cursorY = (cursorY + 1) % mundo->getTablero().getFilas(); // Mueve el cursor hacia arriba 
+			break;
+		case 's':
+			cursorY = (cursorY - 1 + mundo->getTablero().getFilas()) % mundo->getTablero().getFilas(); // Mueve el cursor hacia abajo 
+			break;
+		case 'a':
+			cursorX = (cursorX - 1 + mundo->getTablero().getColumnas()) % mundo->getTablero().getColumnas(); // Mueve el cursor hacia la izquierda 
+			break;
+		case 'd':
+			cursorX = (cursorX + 1) % mundo->getTablero().getColumnas(); // Mueve el cursor hacia la derecha 
+			break;
+		case 13: // Enter 
+			if (seleccionOrigen) {
+				if (mundo->obtenerPiezaEn(Coordenadas(cursorX, cursorY))) {
+					origen = Coordenadas(cursorX, cursorY);
+					seleccionOrigen = false;
+				}
+			}
+			else {
+				try {
+					destino = Coordenadas(cursorX, cursorY);
+					mundo->moverPieza(origen, destino);
+					seleccionOrigen = true;
+				}
+				catch (const std::exception& e) {
+					std::cout << "Movimiento invalido: " << e.what() << std::endl;
+					seleccionOrigen = true;
+				}
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	glutPostRedisplay();
 	
 
 	glutPostRedisplay();

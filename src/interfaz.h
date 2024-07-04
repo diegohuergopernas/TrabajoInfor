@@ -11,3 +11,5 @@ public:
     void iniciarJuego();
     Mundo& obtenerMundo() { return *mundo; }
 };
+extern Coordenadas origen, destino;
+extern bool seleccionOrigen;

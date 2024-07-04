@@ -19,6 +19,7 @@ public:
 	Color obtenerTurnoActual() const { return turnoActual; }
 	ListaPiezas& obtenerListaPiezas() { return piezas; } // Getter para acceder a piezas	
 	void dibujaMundo();
+	Tablero& getTablero() { return tablero; }
 };
 
 
