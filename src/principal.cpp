@@ -106,46 +106,8 @@ void OnDraw(void)
 }
 void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 {
-	if (mundo) {
-		switch (key) {
-		case 'w':
-			cursorY = (cursorY + 1) % mundo->getTablero().getFilas(); // Mueve el cursor hacia arriba 
-			break;
-		case 's':
-			cursorY = (cursorY - 1 + mundo->getTablero().getFilas()) % mundo->getTablero().getFilas(); // Mueve el cursor hacia abajo 
-			break;
-		case 'a':
-			cursorX = (cursorX - 1 + mundo->getTablero().getColumnas()) % mundo->getTablero().getColumnas(); // Mueve el cursor hacia la izquierda 
-			break;
-		case 'd':
-			cursorX = (cursorX + 1) % mundo->getTablero().getColumnas(); // Mueve el cursor hacia la derecha 
-			break;
-		case 13: // Enter 
-			if (seleccionOrigen) {
-				if (mundo->obtenerPiezaEn(Coordenadas(cursorX, cursorY))) {
-					origen = Coordenadas(cursorX, cursorY);
-					seleccionOrigen = false;
-				}
-			}
-			else {
-				try {
-					destino = Coordenadas(cursorX, cursorY);
-					mundo->moverPieza(origen, destino);
-					seleccionOrigen = true;
-				}
-				catch (const std::exception& e) {
-					std::cout << "Movimiento invalido: " << e.what() << std::endl;
-					seleccionOrigen = true;
-				}
-			}
-			break;
-		default:
-			break;
-		}
-	}
-	glutPostRedisplay();
-	
 
+	// Implementación de teclas en interfaz
 	glutPostRedisplay();
 }
 

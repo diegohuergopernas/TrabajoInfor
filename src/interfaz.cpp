@@ -94,7 +94,7 @@ void Interfaz::mostrarMenu() {
 }
 void procesarEntrada(unsigned char key, int x, int y) {
     // Mover el origen y el destino basado en las teclas presionadas
-    // Por ejemplo, WASD para mover, Enter para confirmar
+    // WASD para mover, Enter para confirmar
     switch (key) {
     case 'w':
         cursorY = (cursorY + 1) % mundo->getTablero().getFilas();
