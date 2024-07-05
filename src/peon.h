@@ -27,7 +27,7 @@ public:
             return (dx == 0 && dy == 1) || (coordenadas.get_y() == 1 && dx == 0 && dy == 2);//movimiento normal
         }
         else {
-            if (dx == 0 && dy == -1 && mundo->obtenerPiezaEn(destino) && mundo->obtenerPiezaEn(destino)->getColor() != color) {
+            if (dx == 1 && dy == -1 && mundo->obtenerPiezaEn(destino) && mundo->obtenerPiezaEn(destino)->getColor() != color) {
                 return true;//captura en diagonal
             }
             return (dx == 0 && dy == -1) || (coordenadas.get_y() == 6 && dx == 0 && dy == -2);//movimiento normal
