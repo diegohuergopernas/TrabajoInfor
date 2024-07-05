@@ -6,9 +6,10 @@
 #include "ETSIDI.h"
 class Mundo
 {
+private:
 	Tablero tablero;
 	ListaPiezas piezas;
-	bool turnoBlanco;
+	Color turnoBlanco;
 public:
 	Mundo(int filas = 8, int columnas = 8);
 	void moverPieza(Coordenadas origen, Coordenadas destino);
@@ -21,13 +22,12 @@ public:
 	void dibujaMundo();
 	bool rutaDespejada(Coordenadas origen, Coordenadas destino);
 	Tablero& getTablero() { return tablero; }
-	bool esTurnoBlanco()const { return turnoBlanco; };
-	bool manejaTurno(Coordenadas origen, Mundo& mundo);
+	Color esTurnoBlanco()const { return turnoBlanco; };
 	
 };
 
 
 
 inline void Mundo::cambiarTurno() {
-	turnoBlanco = !turnoBlanco;
+	turnoBlanco = (turnoBlanco == BLANCO) ? NEGRO : BLANCO;
 }

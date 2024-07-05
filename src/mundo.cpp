@@ -10,14 +10,11 @@
 #include "peon.h"
 
 
-Mundo::Mundo(int filas, int columnas) : tablero(filas, columnas), turnoBlanco(true) {
+Mundo::Mundo(int filas, int columnas) : tablero(filas, columnas), turnoBlanco(BLANCO){
     // Agregar piezas al tablero
     
 }
-bool Mundo::manejaTurno(Coordenadas origen, Mundo& mundo) {
 
-    return true;
-}
 
 void Mundo::dibujaMundo()
 {
@@ -50,33 +47,39 @@ bool Mundo::rutaDespejada(Coordenadas origen, Coordenadas destino) {
 
 void Mundo::moverPieza(Coordenadas origen, Coordenadas destino) {
     Pieza* pieza = obtenerPiezaEn(origen);
-    if (pieza && esMovimientoValido(pieza, destino)) {
-        if (pieza->getTipo() != CABALLO && !rutaDespejada(origen, destino)) {
-            std::cout << "Movimiento invalido: ruta bloqueada" << std::endl;
+    if(pieza){
+        if (pieza->getColor() != turnoBlanco) {
+            std::cout << "Movimiento invalido: es el turno del otro color" << std::endl;
             return;
         }
-        //logica especial peon
-        if (pieza->getTipo() == PEON) {
-            int dx = abs(destino.get_x() - origen.get_x());
-            int dy = destino.get_y() - origen.get_y();
-            if ((dx == 1 && dy == ((pieza->getColor() == BLANCO) ? 1 : -1)) && obtenerPiezaEn(destino)) {
-                // Captura en diagonal
-            }
-            else if (dx != 0 || obtenerPiezaEn(destino)) {
-                std::cout << "Movimiento invalido: el peón no puede moverse a esa casilla" << std::endl;
+        if (pieza && esMovimientoValido(pieza, destino)) {
+            if (pieza->getTipo() != CABALLO && !rutaDespejada(origen, destino)) {
+                std::cout << "Movimiento invalido: ruta bloqueada" << std::endl;
                 return;
             }
+            //logica especial peon
+            if (pieza->getTipo() == PEON) {
+                int dx = abs(destino.get_x() - origen.get_x());
+                int dy = destino.get_y() - origen.get_y();
+                if ((dx == 1 && dy == ((pieza->getColor() == BLANCO) ? 1 : -1)) && obtenerPiezaEn(destino)) {
+                    // Captura en diagonal
+                }
+                else if (dx != 0 || obtenerPiezaEn(destino)) {
+                    std::cout << "Movimiento invalido: el peón no puede moverse a esa casilla" << std::endl;
+                    return;
+                }
+            }
+            Pieza* destinoPieza = obtenerPiezaEn(destino);
+            if (destinoPieza && destinoPieza->getColor() != pieza->getColor()) {
+                piezas.eliminar(destinoPieza);
+            }
+            else if (destinoPieza) {
+                std::cout << "Movimiento invalido: hay una pieza del mismo color en el destino" << std::endl;
+                return;
+            }
+            pieza->moverPieza(destino);
+            cambiarTurno();
         }
-        Pieza* destinoPieza = obtenerPiezaEn(destino);
-        if (destinoPieza && destinoPieza->getColor() != pieza->getColor()) {
-            piezas.eliminar(destinoPieza);
-        }
-        else if (destinoPieza) {
-            std::cout << "Movimiento invalido: hay una pieza del mismo color en el destino" << std::endl;
-            return;
-        }
-        pieza->moverPieza(destino);
-        cambiarTurno();
   
     }
 }
