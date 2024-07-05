@@ -10,10 +10,15 @@
 #include "peon.h"
 
 
-Mundo::Mundo(int filas, int columnas) : tablero(filas, columnas), turnoActual(BLANCO) {
+Mundo::Mundo(int filas, int columnas) : tablero(filas, columnas), turnoBlanco(true) {
     // Agregar piezas al tablero
     
 }
+bool Mundo::manejaTurno(Coordenadas origen, Mundo& mundo) {
+
+    return true;
+}
+
 void Mundo::dibujaMundo()
 {
     tablero.dibujarTablero();
@@ -41,6 +46,7 @@ bool Mundo::rutaDespejada(Coordenadas origen, Coordenadas destino) {
 
     return true;
 }
+
 
 void Mundo::moverPieza(Coordenadas origen, Coordenadas destino) {
     Pieza* pieza = obtenerPiezaEn(origen);

@@ -9,13 +9,13 @@ class ListaPiezas
     std::vector<Pieza*> piezas;
 
 public:
-    
+   
     void eliminar(Pieza* p);
     void dibuja() { for (auto p : piezas) p->dibujarPieza(); }
     void agregar(Pieza* pieza) {
         piezas.push_back(pieza);
     }
-
+    
     Pieza* obtenerPiezaEn(Coordenadas coord);
 };
 inline void ListaPiezas::eliminar(Pieza* p) {
