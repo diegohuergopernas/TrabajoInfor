@@ -116,10 +116,18 @@ bool Mundo::movimientoEvitaJaque(Pieza* pieza, Coordenadas destino)
 //Comprueba si el rey esta amenazado por alguna pieza
 bool Mundo::reyAmenazado(Coordenadas reyPos, Color color)
 {
-    for (auto pieza : piezas.obtenerPiezas()) {
+    for (Pieza* pieza : piezas.obtenerPiezas()) {
         if (pieza->getColor() != color && esMovimientoValido(pieza, reyPos)) {
+            if(pieza->getTipo()==CABALLO){
             return true;
         }
+        if (pieza->getTipo() == REY) {
+            continue; // El rey no puede amenazar a otro rey directamente.
+        }
+        if (rutaDespejada(pieza->getCoordenadas(), reyPos)) {
+            return true;
+        }
+      }
     }
     return false;
 }
