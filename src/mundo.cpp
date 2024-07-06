@@ -45,6 +45,7 @@ bool Mundo::rutaDespejada(Coordenadas origen, Coordenadas destino) {
 }
 
 
+
 void Mundo::moverPieza(Coordenadas origen, Coordenadas destino) {
     Pieza* pieza = obtenerPiezaEn(origen);
     if(pieza){
@@ -57,18 +58,7 @@ void Mundo::moverPieza(Coordenadas origen, Coordenadas destino) {
                 std::cout << "Movimiento invalido: ruta bloqueada" << std::endl;
                 return;
             }
-            //logica especial peon
-            if (pieza->getTipo() == PEON) {
-                int dx = abs(destino.get_x() - origen.get_x());
-                int dy = destino.get_y() - origen.get_y();
-                if ((dx == 1 && dy == ((pieza->getColor() == BLANCO) ? 1 : -1)) && obtenerPiezaEn(destino)) {
-                    // Captura en diagonal
-                }
-                else if (dx != 0 || obtenerPiezaEn(destino)) {
-                    std::cout << "Movimiento invalido: el peón no puede moverse a esa casilla" << std::endl;
-                    return;
-                }
-            }
+            
             Pieza* destinoPieza = obtenerPiezaEn(destino);
             if (destinoPieza && destinoPieza->getColor() != pieza->getColor()) {
                 piezas.eliminar(destinoPieza);
@@ -78,7 +68,23 @@ void Mundo::moverPieza(Coordenadas origen, Coordenadas destino) {
                 return;
             }
             pieza->moverPieza(destino);
+            //Condicion de Jaque para movimiento de piezas
+            if (esJaque(pieza->getColor())) {
+                pieza->moverPieza(origen);
+                if (destinoPieza) {
+                    piezas.agregar(destinoPieza);
+                }
+                std::cout << "Movimiento invalido: el rey sigue en jaque" << std::endl;
+                return;
+            }
             cambiarTurno();
+
+            if (esJaque(turnoBlanco ? NEGRO : BLANCO)) {
+                std::cout << "Es jaque para las " << (turnoBlanco ? "negras" : "blancas") << std::endl;
+                if (esJaqueMate(turnoBlanco ? NEGRO : BLANCO)) {
+                    std::cout << "Es jaque mate, ganan las " << (turnoBlanco ? "blancas" : "negras") << std::endl;
+                }
+            }
         }
   
     }
@@ -91,13 +97,47 @@ Pieza* Mundo::obtenerPiezaEn(Coordenadas coord) {
 bool Mundo::esMovimientoValido(Pieza* pieza, Coordenadas destino) {
     return pieza->comprobarMovimiento(destino);
 }
+//comprueba los posibles movimientos para evitar el jaque
+bool Mundo::movimientoEvitaJaque(Pieza* pieza, Coordenadas destino)
+{
+    Coordenadas origen = pieza->getCoordenadas();
+    Pieza* piezaDestino = obtenerPiezaEn(destino);
+    pieza->moverPieza(destino);
+
+    bool evitaJaque = !esJaque(pieza->getColor());
+    pieza->moverPieza(origen);
+
+    if (piezaDestino) {
+        piezas.agregar(piezaDestino);
+    }
+
+    return evitaJaque;;
+}
+//Comprueba si el rey esta amenazado por alguna pieza
+bool Mundo::reyAmenazado(Coordenadas reyPos, Color color)
+{
+    for (auto pieza : piezas.obtenerPiezas()) {
+        if (pieza->getColor() != color && esMovimientoValido(pieza, reyPos)) {
+            return true;
+        }
+    }
+    return false;
+}
 
 bool Mundo::esJaque(Color color) {
     // Lógica para verificar si el rey del color dado está en jaque
-    return false;
+    Coordenadas reyPos;
+    for (auto pieza : piezas.obtenerPiezas()) {
+        if (pieza->getTipo() == REY && pieza->getColor() == color) {
+            reyPos = pieza->getCoordenadas();
+            break;
+        }
+    }
+    return reyAmenazado(reyPos, color);
 }
 
 bool Mundo::esJaqueMate(Color color)
 {
+    
     return false;
 }

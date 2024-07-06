@@ -23,6 +23,10 @@ public:
 	bool rutaDespejada(Coordenadas origen, Coordenadas destino);
 	Tablero& getTablero() { return tablero; }
 	Color esTurnoBlanco()const { return turnoBlanco; };
+
+	// funciones para manejar el jaque
+	bool movimientoEvitaJaque(Pieza* pieza, Coordenadas destino);
+	bool reyAmenazado(Coordenadas reyPos, Color color);
 	
 };
 

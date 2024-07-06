@@ -17,6 +17,7 @@ public:
     }
     
     Pieza* obtenerPiezaEn(Coordenadas coord);
+    std::vector<Pieza*>& obtenerPiezas() { return piezas; } // Getter para acceder a las piezas
 };
 inline void ListaPiezas::eliminar(Pieza* p) {
     piezas.erase(std::remove(piezas.begin(), piezas.end(), p), piezas.end());
