@@ -206,8 +206,8 @@ void Mundo::promover(Coordenadas destino) {
     Pieza* pieza = obtenerPiezaEn(destino);
     if (pieza && pieza->getTipo() == PEON) {
         int filaDestino = destino.get_y();
-        if ((pieza->getColor() == BLANCO && filaDestino == 7) ||
-            (pieza->getColor() == NEGRO && filaDestino == 0)) {
+        if ((pieza->getColor() == BLANCO && filaDestino == tablero.getColumnas()|| filaDestino == 7 ||
+            (pieza->getColor() == NEGRO && filaDestino == 0))) {
             char eleccion;
             std::cout << "Cambia peon: (c) Caballo, (f) Alfil, (t) Torre, (r) Reina: ";
             std::cin >> eleccion;
