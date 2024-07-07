@@ -22,14 +22,14 @@ void Interfaz::dibujaMenu() {
 }
 void Interfaz::mostrarMenu() {
 
-    unsigned char key;
+    int opcion;
     std::cout << "Elije un tablero" << std::endl;
     std::cout << "4x5:" << std::endl;
     std::cout << "Speed Chess:" << std::endl;
     std::cout << "Ajedrez Estandar:" << std::endl;
-    std::cin >> key;
+    std::cin >> opcion;
 
-    switch (key) {
+    switch (opcion) {
     case 1:
         mundo = new Mundo(4, 5);
         mundo->obtenerListaPiezas().agregar(new Peon(BLANCO, Coordenadas(3, 1)));
