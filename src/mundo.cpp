@@ -209,25 +209,40 @@ void Mundo::promover(Coordenadas destino) {
         if ((pieza->getColor() == BLANCO && filaDestino == tablero.getColumnas()|| filaDestino == 7 ||
             (pieza->getColor() == NEGRO && filaDestino == 0))) {
             char eleccion;
-            std::cout << "Cambia peon: (c) Caballo, (f) Alfil, (t) Torre, (r) Reina: ";
-            std::cin >> eleccion;
             Pieza* nuevaPieza = nullptr;
+            int i = 0;
+            do {
+                eleccion = NULL;
+                std::cout << "Cambia peon: (c) Caballo, (f) Alfil, (t) Torre, (r) Reina: ";
+                std::cin >> eleccion;
+                
 
-            switch (eleccion) {
-            case 'c':
-                nuevaPieza = new Caballo(pieza->getColor(), destino);
-                break;
-            case 'f':
-                nuevaPieza = new Alfil(pieza->getColor(), destino);
-                break;
-            case 't':
-                nuevaPieza = new Torre(pieza->getColor(), destino);
-                break;
-            case 'r':
-            default:
-                nuevaPieza = new Reina(pieza->getColor(), destino);
-                break;
-            }
+                switch (eleccion) {
+                case 'c':
+                    nuevaPieza = new Caballo(pieza->getColor(), destino);
+                    i = 0;
+                    break;
+                case 'f':
+                    nuevaPieza = new Alfil(pieza->getColor(), destino);
+                    i = 0;
+                    break;
+                case 't':
+                    nuevaPieza = new Torre(pieza->getColor(), destino);
+                    i = 0;
+                    break;
+                case 'r':
+                    if (filaDestino == 4) {
+                        std::cout << "En este tablero no puedes promover a reina/n";
+                        i = 1;
+                       
+                    }
+                    else {
+                        nuevaPieza = new Reina(pieza->getColor(), destino);
+                        i = 0;
+                        break;
+                    }
+                }
+            } while (i==1);
 
             if (nuevaPieza) {
                 piezas.eliminar(pieza);
