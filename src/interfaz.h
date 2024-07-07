@@ -16,3 +16,4 @@ public:
 };
 extern Coordenadas origen, destino;
 extern bool seleccionOrigen;
+extern Interfaz interfaz;
