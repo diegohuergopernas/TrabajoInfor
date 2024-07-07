@@ -4,6 +4,7 @@
 
 class Rey : public Pieza {
     ETSIDI::Sprite sprite;
+    bool movido = FALSE;
 public:
     Rey(Color color, Coordenadas coord)
         : Pieza(REY, color, coord), sprite(("bin/imagenes/rey_" + std::string(color == BLANCO ? "b" : "n") + ".png").c_str()) {
@@ -20,6 +21,14 @@ public:
     bool comprobarMovimiento(Coordenadas destino) override {
         int dx = abs(destino.get_x() - coordenadas.get_x());
         int dy = abs(destino.get_y() - coordenadas.get_y());
-        return (dx <= 1 && dy <= 1);
+        return (dx <= 1 && dy <= 1) || (dx == 2 && dy == 0 && !movido);//se ha añadido un nuevo atributo para saber si se ha movido con anterioridad 
+    }                                                                   //y poder ejecurar el movimiento de enroque
+
+    bool haSidoMovido() const {
+        return movido;
+    }
+
+    void setMovido(bool valor) {
+        movido = valor;
     }
 };

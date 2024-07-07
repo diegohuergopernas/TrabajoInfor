@@ -58,6 +58,29 @@ void Mundo::moverPieza(Coordenadas origen, Coordenadas destino) {
                 std::cout << "Movimiento invalido: ruta bloqueada" << std::endl;
                 return;
             }
+            //Logica para enroque
+            if (pieza->getTipo() == REY && abs(destino.get_x() - origen.get_x()) == 2) {
+                int direction = (destino.get_x() - origen.get_x()) > 0 ? 1 : -1;
+                Coordenadas torrePos(origen.get_x() + 3 * direction, origen.get_y());
+                if (rutaDespejada(origen, torrePos)) {
+                    Pieza* torre = obtenerPiezaEn(torrePos);
+                    //Usamos el static cast para poder acceder a un método específico de torre que no pertenece a pieza
+                    if (torre && torre->getTipo() == TORRE && !static_cast<Torre*>(torre)->haSidoMovido() && !static_cast<Rey*>(pieza)->haSidoMovido()) {
+                        // Verificar que las casillas entre el origen y el destino no estén en jaque
+                        Coordenadas intermedio1(origen.get_x() + direction, origen.get_y());
+                        Coordenadas intermedio2(origen.get_x() + 2 * direction, origen.get_y());
+                        if (!esJaque(pieza->getColor()) && !reyAmenazado(intermedio1, pieza->getColor()) && !reyAmenazado(intermedio2, pieza->getColor())) {
+                            // Realizar el enroque
+                            torre->moverPieza(Coordenadas(destino.get_x() - direction, destino.get_y()));
+                            static_cast<Torre*>(torre)->setMovido(true);
+                        }
+                        else {
+                            std::cout << "Movimiento invalido: no se puede enrocar porque el rey está en jaque o pasa por una casilla en jaque" << std::endl;
+                            return;
+                        }
+                    }
+                }
+            }
             
             Pieza* destinoPieza = obtenerPiezaEn(destino);
             if (destinoPieza && destinoPieza->getColor() != pieza->getColor()) {

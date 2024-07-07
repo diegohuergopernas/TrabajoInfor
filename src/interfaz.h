@@ -6,7 +6,10 @@
 
 class Interfaz {
     Mundo* mundo;
+
+
 public:
+    void dibujaMenu();
     void mostrarMenu();
     void iniciarJuego();
     Mundo& obtenerMundo() { return *mundo; }

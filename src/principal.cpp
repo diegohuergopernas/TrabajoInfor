@@ -39,6 +39,8 @@ int main(int argc,char* argv[])
 	glutInitWindowSize(800,600);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("MiJuego");
+	
+	
 
 	//habilitar luces y definir perspectiva
 	glEnable(GL_LIGHT0);
@@ -87,17 +89,17 @@ void OnDraw(void)
 	// Ajusta la posición de la cámara según el tamaño del tablero
 	float eyeX = centerX;
 	float eyeY = centerY;
-	float eyeZ = (filas > columnas ? filas : columnas) * casillaSize;  // La distancia de la cámara depende del tamaño del tablero
+	float eyeZ = (filas > columnas ? filas : columnas) * casillaSize; // La distancia de la cámara depende del tamaño del tablero
 
 	gluLookAt(eyeX, eyeY, eyeZ + 7,  // Posición del ojo
 		centerX, centerY, 0.0,      // Hacia qué punto mira
 		0.0, 1.0, 0);      // Definimos hacia arriba (eje Y).0); // Vector de arriba (negativo en Z para que mire desde arriba)
-
-
+	
 	//interfaz.mostrarMenu();
 	if (mundo) {
 		mundo->dibujaMundo();
 	}
+
 	// Dibujar el cursor de selección
 	drawCursor(cursorX * casillaSize, cursorY * casillaSize, casillaSize);
 	
@@ -106,7 +108,6 @@ void OnDraw(void)
 }
 void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 {
-
 	// Implementación de teclas en interfaz
 	glutPostRedisplay();
 }

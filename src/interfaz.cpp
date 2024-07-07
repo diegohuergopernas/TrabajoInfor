@@ -17,17 +17,19 @@ Coordenadas origen, destino;
 bool seleccionOrigen = true;
 extern int cursorX;
 extern int cursorY;
+void Interfaz::dibujaMenu() {
 
+}
 void Interfaz::mostrarMenu() {
-    int opcion;
-    std::cout << "Seleccione el tipo de tablero:\n";
-    std::cout << "1. 4x5 con un unico peon\n";
-    std::cout << "2. Speed Chess\n";
-    std::cout << "3. Tablero estandar\n";
-    std::cout << "Ingrese una opcion: ";
-    std::cin >> opcion;
 
-    switch (opcion) {
+    unsigned char key;
+    std::cout << "Elije un tablero" << std::endl;
+    std::cout << "4x5:" << std::endl;
+    std::cout << "Speed Chess:" << std::endl;
+    std::cout << "Ajedrez Estandar:" << std::endl;
+    std::cin >> key;
+
+    switch (key) {
     case 1:
         mundo = new Mundo(4, 5);
         mundo->obtenerListaPiezas().agregar(new Peon(BLANCO, Coordenadas(3, 1)));
@@ -89,8 +91,9 @@ void Interfaz::mostrarMenu() {
         for (int i = 0; i < 8; ++i) {
             mundo->obtenerListaPiezas().agregar(new Peon(NEGRO, Coordenadas(i, 6)));
         }
-        
+
     }
+    
 }
 void procesarEntrada(unsigned char key, int x, int y) {
     // Mover el origen y el destino basado en las teclas presionadas
@@ -135,13 +138,16 @@ void procesarEntrada(unsigned char key, int x, int y) {
     glutPostRedisplay();
 }
 void Interfaz::iniciarJuego() {
+    
     mostrarMenu();
+    
 
     origen = Coordenadas(0, 0);
     destino = Coordenadas(0, 0);        
     seleccionOrigen = true;
 
         glutKeyboardFunc(procesarEntrada);
+        
 }
     // Dibuja el mundo con el tamaño seleccionado
    
