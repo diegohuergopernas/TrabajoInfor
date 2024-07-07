@@ -62,6 +62,12 @@ void Mundo::moverPieza(Coordenadas origen, Coordenadas destino) {
             if (pieza->getTipo() == REY && abs(destino.get_x() - origen.get_x()) == 2) {
                 int direction = (destino.get_x() - origen.get_x()) > 0 ? 1 : -1;
                 Coordenadas torrePos(origen.get_x() + 3 * direction, origen.get_y());
+                if (direction == 1) { // Enroque corto
+                    torrePos = Coordenadas(origen.get_x() + 3 * direction, origen.get_y());
+                }
+                else { // Enroque largo
+                    torrePos = Coordenadas(origen.get_x() - 4, origen.get_y());
+                }
                 if (rutaDespejada(origen, torrePos)) {
                     Pieza* torre = obtenerPiezaEn(torrePos);
                     //Usamos el static cast para poder acceder a un método específico de torre que no pertenece a pieza
@@ -71,7 +77,12 @@ void Mundo::moverPieza(Coordenadas origen, Coordenadas destino) {
                         Coordenadas intermedio2(origen.get_x() + 2 * direction, origen.get_y());
                         if (!esJaque(pieza->getColor()) && !reyAmenazado(intermedio1, pieza->getColor()) && !reyAmenazado(intermedio2, pieza->getColor())) {
                             // Realizar el enroque
-                            torre->moverPieza(Coordenadas(destino.get_x() - direction, destino.get_y()));
+                            if (direction == 1) { // Enroque corto
+                                torre->moverPieza(Coordenadas(destino.get_x() - direction, destino.get_y()));
+                            }
+                            else { // Enroque largo
+                                torre->moverPieza(Coordenadas(destino.get_x() + 1, destino.get_y()));
+                            }
                             static_cast<Torre*>(torre)->setMovido(true);
                         }
                         else {
@@ -91,6 +102,15 @@ void Mundo::moverPieza(Coordenadas origen, Coordenadas destino) {
                 return;
             }
             pieza->moverPieza(destino);
+
+            // Marcar la pieza como movida si es rey o torre
+            if (pieza->getTipo() == REY) {
+                static_cast<Rey*>(pieza)->setMovido(true);
+            }
+            else if (pieza->getTipo() == TORRE) {
+                static_cast<Torre*>(pieza)->setMovido(true);
+            }
+
             //Condicion de Jaque para movimiento de piezas
             if (esJaque(pieza->getColor())) {
                 pieza->moverPieza(origen);
