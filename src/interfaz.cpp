@@ -23,10 +23,18 @@ void Interfaz::dibujaMenu() {
 void Interfaz::mostrarMenu() {
 
     int opcion;
+<<<<<<< HEAD
     std::cout << "Elije un tablero" << std::endl;
     std::cout << "4x5:" << std::endl;
     std::cout << "Speed Chess:" << std::endl;
     std::cout << "Ajedrez Estandar:" << std::endl;
+=======
+    std::cout << "Seleccione el tipo de tablero:\n";
+    std::cout << "1. 4x5 con un unico peon\n";
+    std::cout << "2. Speed Chess\n";
+    std::cout << "3. Tablero estandar\n";
+    std::cout << "Ingrese una opcion: ";
+>>>>>>> Implementacion de Jaque mate. Conseguimos corregir el error de excepcion no controlada pero sigue sin detectar el jaque correctamente
     std::cin >> opcion;
 
     switch (opcion) {
