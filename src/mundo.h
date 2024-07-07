@@ -4,6 +4,7 @@
 #include "listapiezas.h"
 #include "pieza.h"
 #include "ETSIDI.h"
+
 class Mundo
 {
 private:
@@ -12,6 +13,7 @@ private:
 	Color turnoBlanco;
 public:
 	Mundo(int filas = 8, int columnas = 8);
+	void promover(Coordenadas destino);
 	void moverPieza(Coordenadas origen, Coordenadas destino);
 	Pieza* obtenerPiezaEn(Coordenadas coord);
 	bool esMovimientoValido(Pieza* pieza, Coordenadas destino);

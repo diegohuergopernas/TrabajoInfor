@@ -10,6 +10,7 @@
 #include "peon.h"
 
 
+
 Mundo::Mundo(int filas, int columnas) : tablero(filas, columnas), turnoBlanco(BLANCO){
     // Agregar piezas al tablero
     
@@ -40,7 +41,6 @@ bool Mundo::rutaDespejada(Coordenadas origen, Coordenadas destino) {
         x += stepX;
         y += stepY;
     }
-
     return true;
 }
 
@@ -120,6 +120,7 @@ void Mundo::moverPieza(Coordenadas origen, Coordenadas destino) {
                 std::cout << "Movimiento invalido: el rey sigue en jaque" << std::endl;
                 return;
             }
+            promover(destino);
             cambiarTurno();
 
             if (esJaque(turnoBlanco ? NEGRO : BLANCO)) {
@@ -138,6 +139,7 @@ Pieza* Mundo::obtenerPiezaEn(Coordenadas coord) {
 }
 
 bool Mundo::esMovimientoValido(Pieza* pieza, Coordenadas destino) {
+
     return pieza->comprobarMovimiento(destino);
 }
 //comprueba los posibles movimientos para evitar el jaque
@@ -155,6 +157,41 @@ bool Mundo::movimientoEvitaJaque(Pieza* pieza, Coordenadas destino)
     }
 
     return evitaJaque;;
+}
+//funcion de promocion de peones
+void Mundo::promover(Coordenadas destino) {
+    Pieza* pieza = obtenerPiezaEn(destino);
+    if (pieza && pieza->getTipo() == PEON) {
+        int filaDestino = destino.get_y();
+        if ((pieza->getColor() == BLANCO && filaDestino == 7) ||
+            (pieza->getColor() == NEGRO && filaDestino == 0)) {
+            char eleccion;
+            std::cout << "Cambia peon: (c) Caballo, (f) Alfil, (t) Torre, (r) Reina: ";
+            std::cin >> eleccion;
+            Pieza* nuevaPieza = nullptr;
+
+            switch (eleccion) {
+            case 'c':
+                nuevaPieza = new Caballo(pieza->getColor(), destino);
+                break;
+            case 'f':
+                nuevaPieza = new Alfil(pieza->getColor(), destino);
+                break;
+            case 't':
+                nuevaPieza = new Torre(pieza->getColor(), destino);
+                break;
+            case 'r':
+            default:
+                nuevaPieza = new Reina(pieza->getColor(), destino);
+                break;
+            }
+
+            if (nuevaPieza) {
+                piezas.eliminar(pieza);
+                piezas.agregar(nuevaPieza);
+            }
+        }
+    }
 }
 //Comprueba si el rey esta amenazado por alguna pieza
 bool Mundo::reyAmenazado(Coordenadas reyPos, Color color)
