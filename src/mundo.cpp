@@ -217,7 +217,7 @@ void Mundo::promover(Coordenadas destino) {
             int i = 0;
             do {
                 eleccion = NULL;
-                std::cout << "Cambia peon: (c) Caballo, (f) Alfil, (t) Torre, (r) Reina: ";
+				std::cout << "Cambia peon:\n" << "(c)Caballo \n" << "(f)Alfil \n" << "(t)Torre \n" << "(r)Reina: \n" ;
                 std::cin >> eleccion;
                 
 

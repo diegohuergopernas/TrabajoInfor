@@ -133,6 +133,10 @@ void procesarEntrada(unsigned char key, int x, int y) {
             }
         }
         break;
+    case 'q':
+        interfaz.iniciarJuego(); // Reiniciamos el juego
+        mundo = &interfaz.obtenerMundo(); // Actualizamos el mundo
+        break;
     default:
         break;
     }
